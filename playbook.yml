@@ -4,8 +4,8 @@
     - name: Install updates
       apt:
         update_cache: yes
-        # upgrade: 'yes'
-        # force_apt_get: yes
+        upgrade: 'yes'
+        force_apt_get: yes
       become: yes
       tags:
         - update_sandbox
