@@ -3,6 +3,11 @@
   apt:
     name:
       - htop
+      - acl
+      - vim
+      - git
+      - git-extras
+      - tmux
     state: present
     force_apt_get: yes
   become: yes
