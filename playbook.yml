@@ -10,12 +10,12 @@
       tags:
         - update_sandbox
 
-# - name: Setup users
-#   hosts: all
-#   roles:
-#     - name: users
-#   tags:
-#     - users
+- name: Setup users
+  hosts: all
+  roles:
+    - name: users
+  tags:
+    - users
 
 - name: Install sandbox
   hosts: all
