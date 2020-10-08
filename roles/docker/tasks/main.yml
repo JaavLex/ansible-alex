@@ -1,3 +1,4 @@
+---
 - name: ensure group docker exists
   group:
     name: docker
@@ -24,6 +25,18 @@
   become: yes
   tags:
     - install-docker
+
+- name: remove pip docker-py
+  pip:
+    name: docker-py
+    state: absent
+  become: yes
+
+- name: install docker for pip
+  pip:
+    name: docker
+    state: present
+  become: yes
 
 - name: start service docker, if not started
   service:

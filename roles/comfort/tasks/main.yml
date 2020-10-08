@@ -8,6 +8,7 @@
       - git
       - git-extras
       - tmux
+      - python-minimal
     state: present
     force_apt_get: yes
   become: yes

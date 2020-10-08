@@ -1,0 +1,24 @@
+---
+- name: create a web directory in dojo's home
+  file:
+    path: /home/dojo/web
+    state: directory
+  become: yes
+  become_user: "dojo"
+
+- name: deploy inline template
+  copy:
+    content: '<html><head><title>Hello</title></head><body><h1>Hello World!</h1></body></html>'
+    dest: /home/dojo/web/index.html
+  become: yes
+  become_user: "dojo"
+
+- name: test docker
+  docker_container:
+    name: test-apache-hello-world
+    state: started
+    image: httpd:2.4
+    volumes:
+      - /home/dojo/web:/usr/local/apache2/htdocs/
+    ports:
+      - "8181:80"
