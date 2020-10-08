@@ -1,8 +1,15 @@
 ---
-- name: ensure group docker exists
+# - name: ensure group docker exists
+#   group:
+#     name: docker
+#     state: present
+#   become: yes
+#   tags:
+#     - docker
+- name: ensure group docker does not exists
   group:
     name: docker
-    state: present
+    state: absent
   become: yes
   tags:
     - docker
@@ -20,7 +27,7 @@
   user:
     name: "{{ item.name }}"
     group: "{{ item.name }}"
-    groups: docker
+    # groups: docker
     state: present
   become: yes
   with_items: "{{ vmusers }}"
@@ -39,6 +46,18 @@
   tags:
     - ssh_users_key
     - github_key_import
+
+- name: allow users to sudo without password
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ item.name }}"
+    line: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+    validate: 'visudo -cf %s'
+  with_items: "{{ vmusers }}"
+  become: yes
+  tags:
+    - sudoer
 
 # - name: allow pi's owner to have passwordless sudo
 #   lineinfile:
@@ -65,7 +84,7 @@
   user:
     name: dojo
     group: dojo
-    groups: docker
+    # groups: docker
     state: present
   become: yes
   tags:
