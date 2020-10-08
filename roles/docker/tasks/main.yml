@@ -1,0 +1,34 @@
+- name: ensure group docker exists
+  group:
+    name: docker
+    state: present
+  become: yes
+  tags:
+    - add-group-docker
+
+- name: ensure dojo user in docker group
+  user:
+    name: dojo
+    append: yes
+    groups: docker
+    state: present
+  become: yes
+  tags:
+    - add-dojo-group-docker
+
+- name: install docker package
+  apt:
+    name: docker.io
+    state: present
+    force_apt_get: yes
+  become: yes
+  tags:
+    - install-docker
+
+- name: start service docker, if not started
+  service:
+    name: docker
+    state: started
+  become: yes
+  tags:
+    - start-docker-service

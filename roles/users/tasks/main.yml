@@ -1,18 +1,11 @@
 ---
-# - name: ensure group docker exists
+# - name: ensure group docker does not exists
 #   group:
 #     name: docker
-#     state: present
+#     state: absent
 #   become: yes
 #   tags:
 #     - docker
-- name: ensure group docker does not exists
-  group:
-    name: docker
-    state: absent
-  become: yes
-  tags:
-    - docker
 
 - name: creates users groups
   group:

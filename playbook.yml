@@ -24,9 +24,9 @@
   tags:
     - comfort
 
-# - name: Setup docker
-#   hosts: all
-#   roles:
-#     - name: docker
-#   tags:
-#     - docker
+- name: Setup docker
+  hosts: all
+  roles:
+    - name: docker
+  tags:
+    - docker
