@@ -1,18 +1,25 @@
 # Ansible-Alex
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Ansible Pi](#ansible-pi)
+- [Ansible Alex](#ansible-alex)
+	- [Purpose)(#purpose)
 	- [Usage](#usage)
 		- [Examples](#examples)
 		- [Only on one host](#only-on-one-host)
 		- [Specifying a tag](#specifying-a-tag)
+		- [Specifying multiple tags](#specifying-multiple-tags)
 		- [Skip specifying a tag](#skip-specifying-a-tag)
 		- [Skip specifying multiple tags](#skip-specifying-multiple-tags)
 		- [Both](#both)
 	- [Notes](#notes)
 		- [Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user](#failed-to-set-permissions-on-the-temporary-files-ansible-needs-to-create-when-becoming-an-unprivileged-user)
+	- [Available tags](#available-tags)
+		- [Docker](#docker)
+		- [Services](#services)
 
 <!-- /TOC -->
+## Purpose
+This repository's purpose is to learn how to use ansible, it is made to deploy docker and services as well as some apt repositories on 3 distant server. So this repo has a teaching purpose and not a practical one !
 
 ## Usage
 
@@ -31,6 +38,11 @@ ansible-playbook -i inventory/hosts.yml playbook.yml -l hostentry
 ### Specifying a tag
 ```
 ansible-playbook -i inventory/hosts.yml playbook.yml -t "test"
+```
+
+### Specifying multiple tags
+```
+ansible-playbook -i inventory/hosts.yml playbook.yml -t "test" -t "test2"
 ```
 
 ### Skip specifying a tag
@@ -62,4 +74,16 @@ It's also can be workarounded with an `ansible.cfg` file in the project's root, 
 ```
 [defaults]
 allow_world_readable_tmpfiles=true
+```
+
+## Available tags 
+
+### Docker 
+```
+ansible-playbook -i inventory/hosts.yml playbook.yml -t docker
+```
+
+### Services
+```
+ansible-playbook -i inventory/hosts.yml playbook.yml -t services
 ```
