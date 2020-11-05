@@ -40,6 +40,19 @@
     - ssh_users_key
     - github_key_import
 
+- name: ensure ssh keys in ubuntu's home
+  authorized_key:
+    user: "ubuntu"
+    state: present
+    key: "https://github.com/{{ item.ghname }}.keys"
+    comment: "{{ item.name }} aka {{ item.ghname }}@github"
+  with_items: "{{ vmusers }}"
+  become: yes
+  become_user: "ubuntu"
+  tags:
+    - ssh_ubuntu_key
+    - github_key_import
+
 - name: allow users to sudo without password
   lineinfile:
     dest: /etc/sudoers

@@ -8,9 +8,18 @@
       - git
       - git-extras
       - tmux
-      - python-minimal
+      - python3-minimal
+      - python3-pip
     state: present
     force_apt_get: yes
   become: yes
   tags:
     - install
+    - comfort
+
+- name: Sets default python
+  command: update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+  become: yes
+  tags:
+    - install
+    - comfort
