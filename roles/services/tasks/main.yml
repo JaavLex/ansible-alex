@@ -27,4 +27,9 @@
   # become_user: "dojo"
   tags:
     - test_docker
-# docker run --rm -t -v /home/dojo/web:/var/www/localhost/htdocs -p 8081:80 sebp/lighttpd
+
+- name: Service test 1
+  import_tasks: test1.yml
+#  delegate_to: localhost
+  tags:
+    - service_test_1

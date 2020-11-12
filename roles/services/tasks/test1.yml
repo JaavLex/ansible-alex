@@ -1,0 +1,30 @@
+---
+- name: create a web directory in ubuntu's home
+  file:
+    path: /home/ubuntu/web
+    state: directory
+  become: yes
+  become_user: "ubuntu"
+
+- name: deploy inline template
+  copy:
+    content: '<html><head><title>Hello</title></head><body><h1>Hello Ubuntu!</h1></body></html>'
+    dest: /home/ubuntu/web/index.html
+  become: yes
+  become_user: "ubuntu"
+
+- name: test docker
+  docker_container:
+    name: test_web_hello_ubuntu
+    image: "sebp/lighttpd:latest"
+    state: started
+    tty: yes
+    volumes:
+      - /home/ubuntu/web:/var/www/localhost/htdocs
+    ports:
+      - "8182:80"
+  become: yes
+  # become_user: "ubuntu"
+  tags:
+    - test_docker_ubuntu
+# docker run --rm -t -v /home/ubuntu/web:/var/www/localhost/htdocs -p 8081:80 sebp/lighttpd

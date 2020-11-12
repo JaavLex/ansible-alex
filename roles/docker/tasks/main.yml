@@ -20,7 +20,18 @@
   become: yes
   tags:
     - add-dojo-group-docker
-    - saphire2
+    - add_all_user_dockergroup
+
+- name: ensure ubuntu user in docker group
+  user:
+    name: ubuntu
+    append: yes
+    groups: docker
+    state: present
+  become: yes
+  tags:
+    - add-ubuntu-group-docker
+    - add_all_user_dockergroup
 
 - name: ensure main users in docker group
   user:
@@ -32,7 +43,7 @@
   with_items: "{{ vmusers }}"
   tags:
     - add-main-group-docker
-    - saphire2
+    - add_all_user_dockergroup
 
 - name: install docker package
   apt:
