@@ -18,6 +18,7 @@
     name: test_web_hello_world
     image: "sebp/lighttpd:latest"
     state: started
+    tty: yes
     volumes:
       - /home/dojo/web:/var/www/localhost/htdocs
     ports:
