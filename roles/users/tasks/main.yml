@@ -19,13 +19,15 @@
 - name: add several users from ./vars/main.yml
   user:
     name: "{{ item.name }}"
+    shell: /bin/bash
     group: "{{ item.name }}"
     # groups: docker
     state: present
   become: yes
   with_items: "{{ vmusers }}"
   tags:
-    - groups
+    - add_main_user
+    - add_user
 
 - name: ensure ssh keys in user's home
   authorized_key:
@@ -89,12 +91,14 @@
 - name: ensure dojo user exists
   user:
     name: dojo
+    shell: /bin/bash
     group: dojo
     # groups: docker
     state: present
   become: yes
   tags:
-    - dojo_user
+    - add_dojo_user
+    - add_user
 
 - name: ensure users's ssh keys in dojo account
   authorized_key:
