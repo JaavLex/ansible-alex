@@ -15,10 +15,15 @@
 
 - name: test docker
   docker_container:
-    name: test-apache-hello-world
+    name: test_web_hello_world
+    image: "sebp/lighttpd:latest"
     state: started
-    image: httpd:2.4
     volumes:
-      - /home/dojo/web:/usr/local/apache2/htdocs/
+      - /home/dojo/web:/var/www/localhost/htdocs
     ports:
       - "8181:80"
+  become: yes
+  # become_user: "dojo"
+  tags:
+    - test_docker
+# docker run --rm -t -v /home/dojo/web:/var/www/localhost/htdocs -p 8081:80 sebp/lighttpd
