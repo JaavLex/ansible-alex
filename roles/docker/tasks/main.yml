@@ -16,6 +16,7 @@
   become: yes
   tags:
     - add-dojo-group-docker
+    - saphire2
 
 - name: install docker package
   apt:
