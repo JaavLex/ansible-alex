@@ -1,0 +1,7 @@
+---
+- name: Reboots devices
+  reboot:
+  become: yes
+  tags:
+    - never
+    - reboot

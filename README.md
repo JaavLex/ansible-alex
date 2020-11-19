@@ -60,6 +60,11 @@ ansible-playbook -i inventory/hosts.yml playbook.yml --skip-tags "tag1,tag2,tag3
 ansible-playbook -i inventory/hosts.yml playbook.yml -l hostentry -t "test"
 ```
 
+### Reboot only designated machines
+```
+ansible-playbook -i inventory/hosts.yml playbook.yml -l "host1, host2, ..." -t "reboot"
+```
+
 ## Notes
 
 ### Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user
@@ -76,9 +81,9 @@ It's also can be workarounded with an `ansible.cfg` file in the project's root, 
 allow_world_readable_tmpfiles=true
 ```
 
-## Available tags 
+## Available tags
 
-### Docker 
+### Docker
 ```
 ansible-playbook -i inventory/hosts.yml playbook.yml -t docker
 ```
