@@ -5,3 +5,9 @@
   tags:
     - never
     - reboot
+
+- name: Swap file creation
+  import_tasks: swapfile.yml
+#  delegate_to: localhost
+  tags:
+    - swap_file

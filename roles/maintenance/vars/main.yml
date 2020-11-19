@@ -1,0 +1,8 @@
+---
+# vars file for maintenance
+
+swap_configure: true # manage the swap or not
+swap_enable: true
+swap_file_path: /swapfile
+swap_file_size_mb: 2048
+swappiness: 1
