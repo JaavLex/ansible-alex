@@ -37,3 +37,10 @@
     - name: services
   tags:
     - services
+
+- name: Setup maintenance
+  hosts: all
+  roles:
+    - name: maintenance
+  tags:
+    - maintenance

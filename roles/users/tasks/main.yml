@@ -16,6 +16,7 @@
   tags:
     - user_groups
 
+
 - name: add several users from ./vars/main.yml
   user:
     name: "{{ item.name }}"
@@ -28,6 +29,7 @@
   tags:
     - add_main_user
     - add_user
+
 
 - name: ensure ssh keys in user's home
   authorized_key:
@@ -42,6 +44,7 @@
     - ssh_users_key
     - github_key_import
 
+
 - name: ensure ssh keys in ubuntu's home
   authorized_key:
     user: "ubuntu"
@@ -55,6 +58,7 @@
     - ssh_ubuntu_key
     - github_key_import
 
+
 - name: allow users to sudo without password
   lineinfile:
     dest: /etc/sudoers
@@ -66,6 +70,7 @@
   become: yes
   tags:
     - sudoer
+
 
 # - name: allow pi's owner to have passwordless sudo
 #   lineinfile:
@@ -88,6 +93,7 @@
   tags:
     - dojo_group
 
+
 - name: ensure dojo user exists
   user:
     name: dojo
@@ -99,6 +105,7 @@
   tags:
     - add_dojo_user
     - add_user
+
 
 - name: ensure users's ssh keys in dojo account
   authorized_key:
@@ -113,6 +120,7 @@
     - ssh_dojo_key
     - github_key_import
 
+
 - name: allow dojo to sudo without password
   lineinfile:
     dest: /etc/sudoers
@@ -121,6 +129,8 @@
     line: "dojo ALL=(ALL) NOPASSWD: ALL"
     validate: 'visudo -cf %s'
   become: yes
+  tags:
+     - dojo_sudoer
 
 # - name: ensure users's ssh keys in root account
 #   authorized_key:
