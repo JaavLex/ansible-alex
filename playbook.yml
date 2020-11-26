@@ -44,3 +44,10 @@
     - name: maintenance
   tags:
     - maintenance
+
+- name: Setup api
+  hosts: all
+  roles:
+    - name: services/API/kata-api
+  tags:
+    - api

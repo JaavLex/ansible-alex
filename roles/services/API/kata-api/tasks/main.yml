@@ -1,0 +1,32 @@
+---
+- name: create an api directory in ubuntu's home
+  file:
+    path: /home/ubuntu/api
+    state: directory
+  become: yes
+  become_user: "ubuntu"
+
+- name: copy folder initSQL
+  copy:
+    src: ../template/initSQL
+    dest: /home/ubuntu/api
+  become: yes
+  become_user: "ubuntu"
+
+- name: create docker db
+  docker_container:
+    name: db
+    image: "mariadb"
+    state: started
+    tty: yes
+    volumes:
+      - ./api/initSQL:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    env:
+      MYSQL_ROOT_PASSWORD: "Super"
+      MYSQL_DATABASE: "kata-api"
+  become: yes
+  # become_user: "dojo"
+  tags:
+    - docker_db
