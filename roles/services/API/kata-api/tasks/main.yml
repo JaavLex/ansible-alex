@@ -1,4 +1,8 @@
 ---
+- name: Create a network
+  docker_network:
+    name: apinet
+
 - name: create an api directory in ubuntu's home
   file:
     path: /home/ubuntu/api
@@ -23,6 +27,10 @@
       - ./api/initSQL:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    networks:
+      - name: apinet
+        aliases:
+          - db
     env:
       MYSQL_ROOT_PASSWORD: "Super"
       MYSQL_DATABASE: "kata-api"
@@ -39,7 +47,50 @@
     tty: yes
     ports:
       - "8085:8080"
+    networks:
+      - name: apinet
+        aliases:
+          - adminer
   become: yes
   # become_user: "dojo"
   tags:
     - docker_adminer
+
+- name: copy Dockerfile
+  copy:
+    src: ../template/api/Dockerfile
+    dest: /home/ubuntu/api
+
+- name: build container image
+  docker_image:
+    name: apicontainer:v1.0
+    build:
+      path: /home/ubuntu/api
+      source: build
+    state: present
+
+- name: copy folder api
+  copy:
+    src: ../template/api
+    dest: /home/ubuntu
+  become: yes
+  become_user: "ubuntu"
+
+- name: create docker api
+  docker_container:
+    name: api
+    image: "apicontainer:v1.0"
+    state: started
+    tty: yes
+    volumes:
+      - '/home/ubuntu/api:/var/www/html'
+    ports:
+      - "1337:80"
+    networks:
+      - name: apinet
+        aliases:
+          - api
+  become: yes
+  # become_user: "dojo"
+  tags:
+    - docker_api
