@@ -30,3 +30,16 @@
   # become_user: "dojo"
   tags:
     - docker_db
+
+- name: create docker adminer
+  docker_container:
+    name: adminer
+    image: "adminer"
+    state: started
+    tty: yes
+    ports:
+      - "8085:8080"
+  become: yes
+  # become_user: "dojo"
+  tags:
+    - docker_adminer
