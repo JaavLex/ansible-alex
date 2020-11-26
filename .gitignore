@@ -1,5 +1,3 @@
-./roles/services/API/kata-api/API-gene
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
