@@ -24,7 +24,7 @@ This repository's purpose is to learn how to use ansible, it is made to deploy d
 ## Usage
 
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml
+./alexsible -i inventory/hosts.yml playbook.yml
 ```
 
 
@@ -32,37 +32,37 @@ ansible-playbook -i inventory/hosts.yml playbook.yml
 
 ### Only on one host
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -l hostentry
+./alexsible -i inventory/hosts.yml playbook.yml -l hostentry
 ```
 
 ### Specifying a tag
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -t "test"
+./alexsible -i inventory/hosts.yml playbook.yml -t "test"
 ```
 
 ### Specifying multiple tags
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -t "test" -t "test2"
+./alexsible -i inventory/hosts.yml playbook.yml -t "test" -t "test2"
 ```
 
 ### Skip specifying a tag
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml --skip-tags "github_key_import"
+./alexsible -i inventory/hosts.yml playbook.yml --skip-tags "github_key_import"
 ```
 
 ### Skip specifying multiple tags
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml --skip-tags "tag1,tag2,tag3"
+./alexsible -i inventory/hosts.yml playbook.yml --skip-tags "tag1,tag2,tag3"
 ```
 
 ### Both
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -l hostentry -t "test"
+./alexsible -i inventory/hosts.yml playbook.yml -l hostentry -t "test"
 ```
 
 ### Reboot only designated machines
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -l "host1, host2, ..." -t "reboot"
+./alexsible -i inventory/hosts.yml playbook.yml -l "host1, host2, ..." -t "reboot"
 ```
 
 ## Notes
@@ -85,10 +85,10 @@ allow_world_readable_tmpfiles=true
 
 ### Docker
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -t docker
+./alexsible -i inventory/hosts.yml playbook.yml -t docker
 ```
 
 ### Services
 ```
-ansible-playbook -i inventory/hosts.yml playbook.yml -t services
+./alexsible -i inventory/hosts.yml playbook.yml -t services
 ```

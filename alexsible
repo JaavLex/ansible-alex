@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ ! -d "$HOME/.ansible/collections/ansible_collections/community" ]; then
+        ansible-galaxy collection install community.general
+fi
+
+ansible-playbook $@
