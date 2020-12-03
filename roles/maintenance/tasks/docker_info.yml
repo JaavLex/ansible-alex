@@ -1,0 +1,11 @@
+- name: Get info on docker host
+  community.general.docker_host_info:
+    containers: yes
+  register: docker_result
+
+- name: Display docker_result variable
+  debug:
+    msg:
+    - "{{ docker_result.containers }}"
+  tags:
+    - always
