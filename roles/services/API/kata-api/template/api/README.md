@@ -9,7 +9,7 @@ curl -X GET http://86.119.30.245:1337/beers.php
 
 ### get beers list by id
 ```bash
-curl -X GET http://86.119.30.245:1337/beers.php&id=YOUR_ID_HERE
+curl -X GET http://86.119.30.245:1337/beers.php?id=YOUR_ID_HERE
 ```
 
 ## PUT
