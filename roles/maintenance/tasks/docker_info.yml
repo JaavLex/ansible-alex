@@ -7,5 +7,3 @@
   debug:
     msg:
     - "{{ docker_result.containers }}"
-  tags:
-    - always
