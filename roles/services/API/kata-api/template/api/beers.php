@@ -4,8 +4,7 @@
 	$request_method = $_SERVER["REQUEST_METHOD"];
 
 	function getBeers()
-	{
-
+  {
 		$query = "SELECT * FROM beers LIMIT 50";
 		$response = array();
 		$stmt = EDatabase::prepare($query);
@@ -58,7 +57,6 @@
 			EDatabase::rollBack();
 			return false;
 		}
-
 /* 		header('Content-Type: application/json'); */
 		echo json_encode($sth);
 	}
@@ -68,7 +66,7 @@
 		$query = "DELETE FROM beers WHERE id=:id";
 		$sth = EDatabase::prepare($query);
 		try {
-			$sth->bindParam(':id', $id, PDO::PARAM_INT);
+			$sth->bindParam(':id', $id, PDO::PARAM_INT);   
 			$sth->execute();
 		} catch (PDOException $e) {
 			echo 'Problème de lecture de la base de données: ' . $e->getMessage();
@@ -79,7 +77,6 @@
 		header('Content-Type: application/json');
 		echo json_encode($sth);
 	}
-
 
 	function updateBeer()
   	{
@@ -113,7 +110,7 @@
 			EDatabase::rollBack();
 			return false;
 		}
-
+    
 		header('Content-Type: application/json');
 		echo json_encode($sth);
 	}
