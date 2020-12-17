@@ -11,3 +11,9 @@
 #  delegate_to: localhost
   tags:
     - swap_file
+
+- name: Get host docker infos
+  import_tasks: docker_info.yml
+  tags:
+    - never
+    - docker-info
