@@ -4,8 +4,7 @@
 	$request_method = $_SERVER["REQUEST_METHOD"];
 
 	function getBeers()
-	{
-		
+  {
 		$query = "SELECT * FROM beers LIMIT 50";
 		$response = array();
 		$stmt = EDatabase::prepare($query);
@@ -14,7 +13,7 @@
 		header('Content-Type: application/json');
 		echo json_encode($response, JSON_PRETTY_PRINT);
 	}
-	
+
 	function getBeer($id=0)
 	{
 		$query = "SELECT * FROM beers";
@@ -32,7 +31,10 @@
 
 	function AddBeer()
 	{
-		$sql = "INSERT INTO beers (brewery_id, name, cat_id, style_id, abv, ibu, srm, upc, filepath, descript, add_user, last_mod) 
+		$tmp = (file_get_contents('php://input'));
+		$_POST = (json_decode($tmp, true));
+
+		$sql = "INSERT INTO beers (brewery_id, name, cat_id, style_id, abv, ibu, srm, upc, filepath, descript, add_user, last_mod)
 						   VALUES (:bre, :nam, :cat, :sty, :abv, :ibu, :srm, :upc, :fil, :des, :add, :las)";
 		$sth = EDatabase::prepare($sql);
 		try {
@@ -55,7 +57,6 @@
 			EDatabase::rollBack();
 			return false;
 		}
-		
 /* 		header('Content-Type: application/json'); */
 		echo json_encode($sth);
 	}
@@ -76,7 +77,6 @@
 		header('Content-Type: application/json');
 		echo json_encode($sth);
 	}
-	
 
 	function updateBeer()
   	{
@@ -85,7 +85,7 @@
 		$_PUT = (json_decode($tmp, true));
 		//construire la requête SQL
 		$sql="UPDATE beers SET brewery_id=:bre, name=:nam, cat_id=:cat, style_id=:sty, abv=:abv, ibu=:ibu, srm=:srm, upc=:upc, filepath=:fil, descript=:des, add_user=:add, last_mod=:las WHERE id=:id";
-		
+
 		var_dump($_PUT["commentaire"]);
 		var_dump($_PUT["postType"]);
 		var_dump($_PUT["id"]);
@@ -110,14 +110,14 @@
 			EDatabase::rollBack();
 			return false;
 		}
-		
+    
 		header('Content-Type: application/json');
 		echo json_encode($sth);
 	}
 
 	switch($request_method)
 	{
-		
+
 		case 'GET':
 			// Retrive Beer
 			if(!empty($_GET["id"]))
